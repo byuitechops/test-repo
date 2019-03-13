@@ -8,7 +8,7 @@ async function getValidBranches() {
         if (err) console.error(err);
         branches = Object.keys(summary.branches);
     });
-    return branches;
+    return branches.filter(branch => !branch.includes('/'));
 }
 
 async function getUserInput(branches) {
