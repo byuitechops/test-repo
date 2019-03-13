@@ -28,6 +28,8 @@ async function doGitStuff(branch) {
         .push('origin', branch)
         // .checkoutBranch('master', branch, (err) => console.error(err))
         .mergeFromTo(branch, 'master', (err) => console.error(err))
+        .push('origin', 'master')
+
 }
 
 getValidBranches()
