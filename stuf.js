@@ -23,9 +23,11 @@ async function getUserInput(branches) {
 
 async function doGitStuff(branch) {
     await git()
+        .add(['stuf.js'], (err) => console.error(err))
+        .commit('test1', (err) => console.error(err))
         .push('origin', branch)
-    // .checkoutBranch('master', branch, (err) => console.error(err))
-    // .mergeFromTo(branch, 'master', (err) => console.error(err))
+        // .checkoutBranch('master', branch, (err) => console.error(err))
+        .mergeFromTo(branch, 'master', (err) => console.error(err))
 }
 
 getValidBranches()
