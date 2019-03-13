@@ -26,12 +26,10 @@ async function doGitStuff(branch) {
         .add(['stuf.js'], (err) => console.error(err))
         .commit('test2', (err) => console.error(err))
         .push('origin', branch)
+        .checkout('master', (err) => console.error(err))
         .mergeFromTo(branch, 'master', (err) => console.error(err))
-
-        // .checkoutBranch('master', branch, (err) => console.error(err))
         // .merge()
         .push('origin', 'master')
-
 }
 
 getValidBranches()
