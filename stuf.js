@@ -1,5 +1,6 @@
 const git = require('simple-git');
-const prompt = require('prompts');
+const prompts = require('prompts');
+
 
 async function getValidBranches() {
     var branches;
@@ -11,8 +12,8 @@ async function getValidBranches() {
 }
 
 async function getUserInput(branches) {
-    const response = await prompt({
-        type: '',
+    let response = await prompts({
+        type: 'text',
         name: 'repo',
         message: 'What is your current repo?',
         validate: value => branches.includes(value) ? true : "That branch doesn't exist"
@@ -23,8 +24,12 @@ async function getUserInput(branches) {
 async function doGitStuff(branch) {
     await git()
         .push('origin', branch)
-        .checkoutBranch('master', branch, (err) => console.error(err))
-        .mergeFromTo(branch, 'master', (err) => console.error(err))
+    // .checkoutBranch('master', branch, (err) => console.error(err))
+    // .mergeFromTo(branch, 'master', (err) => console.error(err))
 }
 
-getValidBranches().then((stuff) => getUserInput(stuff)).then((branch) => doGitStuff(branch))
+getValidBranches()
+    .then((branches) => getUserInput(branches))
+    .then((res) => doGitStuff(res.repo))
+
+
